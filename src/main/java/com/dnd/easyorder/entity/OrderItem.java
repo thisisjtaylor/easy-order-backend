@@ -12,7 +12,7 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
-    @Column(name = "product_name", nullable = false)
+    @Column(name = "product_name", nullable = true)
     private String productName;
 
     @Column(name = "quantity", nullable = false)
@@ -23,6 +23,21 @@ public class OrderItem {
 
     @Column(name = "note")
     private String note;
+
+    @Column(name = "category", nullable = false)
+    private String category;
+
+    @Column(name = "sausage_type")
+    private String sausageType;
+
+    @Column(name = "sausage_form")
+    private String sausageForm;
+
+    @Column(name = "fennel")
+    private String fennel;
+
+    @Column(name = "add_cheese")
+    private Boolean addCheese;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
@@ -78,5 +93,45 @@ public class OrderItem {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSausageType() {
+        return sausageType;
+    }
+
+    public void setSausageType(String sausage_type) {
+        this.sausageType = sausage_type;
+    }
+
+    public String getSausageForm() {
+        return sausageForm;
+    }
+
+    public void setSausageForm(String sausage_form) {
+        this.sausageForm = sausage_form;
+    }
+
+    public String getFennel() {
+        return fennel;
+    }
+
+    public void setFennel(String fennel) {
+        this.fennel = fennel;
+    }
+
+    public Boolean getAddCheese() {
+        return addCheese;
+    }
+
+    public void setAddCheese(Boolean add_cheese) {
+        this.addCheese = add_cheese;
     }
 }

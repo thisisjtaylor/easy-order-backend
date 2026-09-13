@@ -2,16 +2,16 @@ package com.dnd.easyorder.model;
 
 public class CustomerRequest {
 
-    private String name;
+    private String customerName;
 
     private String phone;
 
-    public String getName() {
-        return name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getPhone() {

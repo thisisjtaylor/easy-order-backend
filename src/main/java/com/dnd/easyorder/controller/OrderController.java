@@ -1,5 +1,6 @@
 package com.dnd.easyorder.controller;
 
+import com.dnd.easyorder.model.ApiMessageResponse;
 import com.dnd.easyorder.model.PlaceOrderRequest;
 import com.dnd.easyorder.model.PlaceOrderResponse;
 import com.dnd.easyorder.model.OrderHistoryResponse;
@@ -23,14 +24,23 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping("/getOrderHistory")
-    public ResponseEntity<List<OrderHistoryResponse>> getOrderHistory(@RequestParam String phone) {
+    public ResponseEntity<?> getOrderHistory(@RequestParam String phone) {
 
         try {
+            if(customerService.getCustomerByPhone(phone) != null){
+                List<OrderHistoryResponse> orders =
+                        orderService.getOrderHistory(phone);
+                return ResponseEntity.ok(orders);
+            }else{
+                return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ApiMessageResponse(
+                            "No customer found with phone number " + phone
+                    ));
+            }
 
-            List<OrderHistoryResponse> orders =
-                    orderService.getOrderHistory(phone);
 
-            return ResponseEntity.ok(orders);
+
 
         } catch (Exception e) {
 

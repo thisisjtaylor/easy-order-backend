@@ -12,6 +12,16 @@ public class OrderItemResponse {
 
     private String note;
 
+    private String sausageForm;
+
+    private String sausageType;
+
+    private String category;
+
+    private String fennel;
+
+    private Boolean addCheese;
+
     public OrderItemResponse() {
     }
 
@@ -45,5 +55,45 @@ public class OrderItemResponse {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getSausageForm() {
+        return sausageForm;
+    }
+
+    public void setSausageForm(String sausageForm) {
+        this.sausageForm = sausageForm;
+    }
+
+    public String getSausageType() {
+        return sausageType;
+    }
+
+    public void setSausageType(String sausageType) {
+        this.sausageType = sausageType;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getFennel() {
+        return fennel;
+    }
+
+    public void setFennel(String fennel) {
+        this.fennel = fennel;
+    }
+
+    public Boolean getAddCheese() {
+        return addCheese;
+    }
+
+    public void setAddCheese(Boolean addCheese) {
+        this.addCheese = addCheese;
     }
 }

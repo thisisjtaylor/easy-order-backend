@@ -5,21 +5,15 @@ import java.util.List;
 
 public class PlaceOrderRequest {
 
-    private CustomerRequest customer;
+    private String customerName;
+
+    private String phone;
 
     private LocalDate pickupDate;
 
     private String summaryNotes;
 
     private List<OrderItemRequest> items;
-
-    public CustomerRequest getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(CustomerRequest customer) {
-        this.customer = customer;
-    }
 
     public LocalDate getPickupDate() {
         return pickupDate;
@@ -43,5 +37,21 @@ public class PlaceOrderRequest {
 
     public void setItems(List<OrderItemRequest> items) {
         this.items = items;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

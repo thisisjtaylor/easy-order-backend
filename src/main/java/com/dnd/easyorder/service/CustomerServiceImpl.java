@@ -15,7 +15,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer getCustomerByPhone(String phone) {
         Customer c = customerRepo.findCustomerByPhone(phone);
-        System.out.println(c);
         return customerRepo.findCustomerByPhone(phone);
     }
 }
