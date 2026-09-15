@@ -7,12 +7,14 @@ import com.dnd.easyorder.model.*;
 import com.dnd.easyorder.repo.CustomerRepo;
 import com.dnd.easyorder.repo.OrderItemRepo;
 import com.dnd.easyorder.repo.OrderRepo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -52,11 +54,14 @@ public class OrderServiceImpl implements OrderService {
         Customer customer =
                 customerService.getCustomerByPhone(request.getPhone());
 
-        if (customer == null) {
-            customer = this.mapToCustomer(request);
-            customer = customerRepo.save(customer);
-        }
+        Customer reqCustomer = this.mapToCustomer(request);
 
+        if (customer == null) {
+            customer = customerRepo.save(reqCustomer);
+        }else if(!Objects.equals(customer.getName(), reqCustomer.getName())) {
+            customer.setName(reqCustomer.getName());
+            customerRepo.updateCustomerName(customer.getId(), customer.getName());
+        }
         Order order =
                 this.mapToOrder(request, customer);
 
