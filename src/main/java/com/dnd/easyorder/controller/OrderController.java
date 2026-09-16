@@ -1,9 +1,6 @@
 package com.dnd.easyorder.controller;
 
-import com.dnd.easyorder.model.ApiMessageResponse;
-import com.dnd.easyorder.model.PlaceOrderRequest;
-import com.dnd.easyorder.model.PlaceOrderResponse;
-import com.dnd.easyorder.model.OrderHistoryResponse;
+import com.dnd.easyorder.model.*;
 import com.dnd.easyorder.service.CustomerService;
 import com.dnd.easyorder.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +35,6 @@ public class OrderController {
                             "No customer found with phone number " + phone
                     ));
             }
-
-
-
-
         } catch (Exception e) {
 
             return ResponseEntity
@@ -58,5 +51,11 @@ public class OrderController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @PostMapping("/orderSearch")
+    public ResponseEntity<?> orderSearch(@RequestBody OrderSearchRequest request){
+        System.out.println(request);
+        return null;
     }
 }
