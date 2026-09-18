@@ -11,6 +11,7 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,7 +89,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderHistoryResponse> searchOrder(OrderSearchRequest request) {
         Specification<Order> specification =
                 this.search(request);
-        List<Order> orderList = orderRepo.findAll(specification);
+        List<Order> orderList = orderRepo.findAll(specification, Sort.by(Sort.Direction.DESC, "id"));
         List<OrderHistoryResponse> response = new ArrayList<>();
 
         for(Order order : orderList){
