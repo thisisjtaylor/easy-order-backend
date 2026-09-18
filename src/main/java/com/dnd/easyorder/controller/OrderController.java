@@ -55,7 +55,9 @@ public class OrderController {
 
     @PostMapping("/orderSearch")
     public ResponseEntity<?> orderSearch(@RequestBody OrderSearchRequest request){
-        System.out.println(request);
-        return null;
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(orderService.searchOrder(request));
     }
 }
