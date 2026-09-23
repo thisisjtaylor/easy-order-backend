@@ -24,6 +24,7 @@ public class OrderController {
     public ResponseEntity<?> getOrderHistory(@RequestParam String phone) {
 
         try {
+
             if(customerService.getCustomerByPhone(phone) != null){
                 List<OrderHistoryResponse> orders =
                         orderService.getOrderHistory(phone);
@@ -60,4 +61,16 @@ public class OrderController {
                 .status(HttpStatus.CREATED)
                 .body(orderService.searchOrder(request));
     }
+    @PutMapping("/orders/{orderId}")
+    public ResponseEntity<PlaceOrderResponse> updateOrder(
+            @PathVariable Long orderId,
+            @RequestBody PlaceOrderRequest request) {
+
+        PlaceOrderResponse response =
+                orderService.updateOrder(orderId, request);
+
+        return ResponseEntity.ok(response);
+    }
 }
+
+

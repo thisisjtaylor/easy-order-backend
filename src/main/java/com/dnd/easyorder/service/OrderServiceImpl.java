@@ -98,6 +98,131 @@ public class OrderServiceImpl implements OrderService {
         return response;
     }
 
+    @Transactional
+    @Override
+    public PlaceOrderResponse updateOrder(Long orderId, PlaceOrderRequest request) {
+        Order order = orderRepo.findById(orderId)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Order #" + orderId + " not found"
+                        )
+                );
+
+
+        // -------------------------
+        // UPDATE CUSTOMER
+        // -------------------------
+
+        Customer customer =
+                customerService.getCustomerByPhone(
+                        request.getPhone()
+                );
+
+        if (customer == null) {
+
+            Customer newCustomer = new Customer();
+
+            newCustomer.setName(
+                    request.getCustomerName()
+            );
+
+            newCustomer.setPhone(
+                    request.getPhone()
+            );
+
+            customer = customerRepo.save(newCustomer);
+
+        }
+
+        order.setCustomer(customer);
+
+
+        // -------------------------
+        // UPDATE ORDER
+        // -------------------------
+
+        order.setPickupDate(
+                request.getPickupDate()
+        );
+
+        order.setSummaryNotes(
+                request.getSummaryNotes()
+        );
+
+
+        // -------------------------
+        // REMOVE OLD ITEMS
+        // -------------------------
+
+        order.getItems().clear();
+
+
+        // -------------------------
+        // ADD UPDATED ITEMS
+        // -------------------------
+
+        for (OrderItemRequest requestItem
+                : request.getItems()) {
+
+            OrderItem item = new OrderItem();
+
+            item.setOrder(order);
+
+            item.setCategory(
+                    requestItem.getCategory()
+            );
+
+            item.setProductName(
+                    requestItem.getProduct()
+            );
+
+            item.setQuantity(
+                    requestItem.getQuantity()
+            );
+
+            item.setUnit(
+                    requestItem.getUnit()
+            );
+
+            item.setNote(
+                    requestItem.getNote()
+            );
+
+            item.setSausageType(
+                    requestItem.getType()
+            );
+
+            item.setSausageForm(
+                    requestItem.getForm()
+            );
+
+            item.setFennel(
+                    requestItem.getFennel()
+            );
+
+            item.setAddCheese(
+                    requestItem.getCheese()
+            );
+
+
+            order.getItems().add(item);
+        }
+
+
+        // -------------------------
+        // SAVE
+        // -------------------------
+
+        orderRepo.save(order);
+
+
+        return new PlaceOrderResponse(
+                order.getId(),
+                "Order #" + order.getId()
+                        + " Updated Successfully. Please advise ticketing is reprinting and discard old ticket."
+        );
+    }
+
     public static Specification<Order> search(
             OrderSearchRequest request) {
 

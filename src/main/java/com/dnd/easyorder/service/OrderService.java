@@ -14,4 +14,6 @@ public interface OrderService {
     public PlaceOrderResponse placeOrder(PlaceOrderRequest request);
 
     public List<OrderHistoryResponse> searchOrder(OrderSearchRequest request);
+
+    public PlaceOrderResponse updateOrder(Long orderId, PlaceOrderRequest request);
 }
