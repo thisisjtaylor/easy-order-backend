@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dnd</groupId>
-    <artifactId>easyOrder</artifactId>
+    <artifactId>easy-order-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>easyOrder</name>
     <description>easyOrder</description>
